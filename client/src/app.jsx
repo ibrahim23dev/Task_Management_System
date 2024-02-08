@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import PublicRoute from "./router/Routers/publicRouter";
+import Routes from "./router/Routes";
+import { GetRoutes } from "./router/Routers";
 
-function app() {
-  return (
-    <div>
-     <h1 className="text-3xl font-bold underline">
-     
-    </h1>
-    </div>
-  )
-}
+const App = () => {
+  const [allRoutes, setAllRoutes] = useState([...PublicRoute]);
 
-export default app
+  useEffect(() => {
+  const routes = GetRoutes();
+    setAllRoutes((allRoutes)=>[routes,...allRoutes]);
+}, []);
+
+  return <Routes allRoutes={allRoutes} />;
+};
+
+export default App;
